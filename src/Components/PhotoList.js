@@ -17,11 +17,7 @@ const PhotoList = (props) => {
   return(
     <div className="photo-container">
       {heading}
-        {
-          (props.loading)
-          ? <p>Loading...</p>
-          : <ul> {photos} </ul> 
-        }
+      <ul> {photos} </ul> 
     </div>
   )
 }
