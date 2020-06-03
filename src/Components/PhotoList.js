@@ -2,7 +2,7 @@ import React from 'react';
 import Photo from './Photo';
 import NotFound from './NotFound';
 
-const PhotoList = props => {
+const PhotoList = (props) => {
 
   const results =  props.data;
   let photos;

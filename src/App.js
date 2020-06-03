@@ -2,13 +2,11 @@ import React, {Component} from 'react';
 import './App.css';
 import axios from 'axios';
 import apiKey from './config.js';
-import history from './history';
+import { createBrowserHistory } from 'history';
 import { 
   BrowserRouter,
   Route,
-  Switch,
-  Redirect,
-  withRouter
+  Switch
 } from 'react-router-dom';
 
 //components
@@ -16,12 +14,14 @@ import PhotoList from './Components/PhotoList';
 import SearchForm from './Components/SearchForm';
 import Nav from './Components/Nav';
 
+const history = createBrowserHistory();
+
 export default class App extends Component {
 
   constructor() {
     super();
     this.state = {
-      search: 'cosmos',
+      topic: 'cosmos',
       photos: [],
       cosmos: [],
       nature: [],
@@ -53,7 +53,7 @@ export default class App extends Component {
           });
         }
         this.setState({
-          search: query,
+          topic: query,
           photos: response.data.photos.photo,
           loading: false
         })
@@ -73,13 +73,13 @@ export default class App extends Component {
             <title>React App Assets</title>
             <link href="css/index.css" rel="stylesheet" />
           </head>
-          <SearchForm onSearch={this.performSearch} history={this.props.history} />
+          <SearchForm onSearch={this.performSearch} history={history} />
           <Nav />
           <Switch>
+            <Route path={'/search/:search'} render={() => <PhotoList loading={this.state.loading} data={this.state.photos} /> } />
             <Route path={'/cosmos'} render={() => <PhotoList loading={this.state.loading} data={this.state.cosmos} /> } />
             <Route path={'/nature'} render={() => <PhotoList loading={this.state.loading} data={this.state.nature} /> } />
             <Route path={'/machines'} render={() => <PhotoList loading={this.state.loading} data={this.state.machines} /> } />
-            <Route path={`${this.state.search}`} render={() => <PhotoList loading={this.state.loading} data={this.state.photos} /> } />
             <Route path={'/'} render={() => <PhotoList loading={this.state.loading} data={this.state.photos} /> } />
           </Switch>
         </div>

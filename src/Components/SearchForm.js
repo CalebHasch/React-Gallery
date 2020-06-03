@@ -1,6 +1,4 @@
 import React, {Component} from 'react';
-import {Route, Redirect, withRouter} from 'react-router-dom';
-import history from '../history';
 
 export default class SearchForm extends Component {
 
@@ -15,9 +13,9 @@ export default class SearchForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     let topic = this.query.value
-    let path = `/${topic}`;
-    this.props.history.push(path);
+    let path = `/search/${topic}`;
     this.props.onSearch(topic);
+    this.props.history.push(path);
     e.currentTarget.reset();
   }
 
