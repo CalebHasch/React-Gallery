@@ -13,6 +13,7 @@ import {
 import PhotoList from './Components/PhotoList';
 import SearchForm from './Components/SearchForm';
 import Nav from './Components/Nav';
+import Error from './Components/Error';
 
 const history = createBrowserHistory();
 
@@ -21,7 +22,6 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      topic: 'cosmos',
       photos: [],
       cosmos: [],
       nature: [],
@@ -53,7 +53,6 @@ export default class App extends Component {
           });
         }
         this.setState({
-          topic: query,
           photos: response.data.photos.photo,
           loading: false
         })
@@ -67,20 +66,15 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-          <head>
-            <meta charset="utf-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-            <title>React App Assets</title>
-            <link href="css/index.css" rel="stylesheet" />
-          </head>
           <SearchForm onSearch={this.performSearch} history={history} />
           <Nav />
           <Switch>
+            <Route exact path={'/'} render={() => <PhotoList loading={this.state.loading} data={this.state.photos} /> } />
             <Route path={'/search/:search'} render={() => <PhotoList loading={this.state.loading} data={this.state.photos} /> } />
             <Route path={'/cosmos'} render={() => <PhotoList loading={this.state.loading} data={this.state.cosmos} /> } />
             <Route path={'/nature'} render={() => <PhotoList loading={this.state.loading} data={this.state.nature} /> } />
             <Route path={'/machines'} render={() => <PhotoList loading={this.state.loading} data={this.state.machines} /> } />
-            <Route path={'/'} render={() => <PhotoList loading={this.state.loading} data={this.state.photos} /> } />
+            <Route render={() => <Error /> } />
           </Switch>
         </div>
       </BrowserRouter>
