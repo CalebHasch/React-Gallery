@@ -36,12 +36,14 @@ export default class App extends Component {
     this.performSearch();
   }
   
+  // Searches gallery api & returns pictures
   performSearch = (query = 'cosmos') => {
     this.setState({
       loading: true
     })
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
+      // preset searches
       if (query === 'cosmos') {
         this.setState({
           cosmos: response.data.photos.photo
@@ -55,6 +57,7 @@ export default class App extends Component {
           machines: response.data.photos.photo
         });
       }
+      // return search
       this.setState({
         photos: response.data.photos.photo,
         loading: false
@@ -72,6 +75,7 @@ export default class App extends Component {
           <SearchForm onSearch={this.performSearch} history={history} loading={this.state.loading} />
           <Nav />
           {
+            // adds loading screen
             (this.state.loading)
             ? <p>Loading...</p>
             : 

@@ -11,6 +11,7 @@ class SearchForm extends Component {
     this.setState({ searchText: e.target.value });
   }
   
+  // activates search function
   handleSubmit = e => {
     e.preventDefault();
     let topic = this.query.value
@@ -20,6 +21,7 @@ class SearchForm extends Component {
     e.currentTarget.reset();
   }
 
+  // renders search form
   render() {
     return (
       <div>

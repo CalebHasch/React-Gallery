@@ -2,6 +2,7 @@ import React from 'react';
 import Photo from './Photo';
 import NotFound from './NotFound';
 
+// lists photos on the page
 const PhotoList = (props) => {
 
   const results =  props.data;

@@ -1,7 +1,7 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-//import Cosmos from './Links/Cosmos';
 
+// Links to preset searches
 const Nav = props => {
   
   return(
