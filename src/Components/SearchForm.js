@@ -30,7 +30,7 @@ class SearchForm extends Component {
           onChange={this.onSearchChange}
           name="search" 
           ref={(input) => this.query = input}
-          placeholder="Search" 
+          placeholder="Search..." 
           required/>
           <button type="submit" className="search-button">
             <svg fill="#fff" height="24" viewBox="0 0 23 23" width="24" xmlns="http://www.w3.org/2000/svg">
